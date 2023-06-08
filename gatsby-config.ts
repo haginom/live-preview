@@ -1,5 +1,9 @@
 import type { GatsbyConfig } from "gatsby";
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 const isProd = process.env.NODE_ENV === "production";
 
 const config: GatsbyConfig = {
@@ -15,11 +19,11 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-sanity",
       options: {
-        projectId: "k1v0o1cy",
+        projectId: process.env.GATSBY_SANITY_ID,
         dataset: "production",
         overlayDrafts: !isProd,
         watchMode: !isProd,
-        token: process.env.SANITY_TOKEN,
+        token: process.env.GATSBY_SANITY_TOKEN,
       },
     },
     "gatsby-plugin-image",
